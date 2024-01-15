@@ -1,0 +1,25 @@
+{
+  "name": "travel-planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergio-Cano/Travel-Planner.git"
+  },
+  "author": "Sergio Cano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sergio-Cano/Travel-Planner/issues"
+  },
+  "homepage": "https://github.com/Sergio-Cano/Travel-Planner#readme",
+  "dependencies": {
+    "@prisma/client": "^5.8.0",
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.2",
+    "prisma": "^5.8.0"
+  }
+}
