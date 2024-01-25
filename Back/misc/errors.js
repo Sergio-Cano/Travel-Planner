@@ -11,6 +11,10 @@ module.exports = {
         statusCode: 400,
         error: new Error('password length must be at least 4'),
     },
+    existing_email: {
+        statusCode: 400,
+        error: new Error('This email already exists'),
+    },
     401: {
         statusCode: 401,
         error: new Error('unauthorized'),

@@ -1,12 +1,17 @@
 const prisma = require("../../prisma");
 const { hashPass } = require("../../misc/authUtils");
 const errors = require("../../misc/errors");
+const { signupValidation } = require("../../misc/validations");
 
 module.exports = () => async (req, res, next) => {
-    const { email, username, password } = req.body;
+    const {email, username, password} = req.body;
 
-    if(!email || !username || !password) return next(errors[400]);
+    const validationErrors = await signupValidation(email, username, password);
 
+    if(validationErrors?.empty_inputs) return next(errors[400]);
+    if(validationErrors?.existing_email) return next(errors.existing_email);
+    if(validationErrors?.empty_inputs) return next(errors.pass_length);
+    
     const hashedPassword = await hashPass(password);
 
     const response = await prisma.user.create({

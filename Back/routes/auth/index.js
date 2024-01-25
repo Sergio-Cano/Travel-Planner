@@ -1,9 +1,10 @@
 const router = require("express").Router();
+const isAuthenticated = require("../../middlewares/isAuthenticated");
 
 module.exports = () => {
     router.post("/signup", require("./signup")());
     router.post("/signin", require("./signin")());
-    router.post("/signout", require("./signout")());
+    router.post("/signout", isAuthenticated, require("./signout")());
 
     return router;
 }
