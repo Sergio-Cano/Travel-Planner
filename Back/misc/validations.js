@@ -1,5 +1,4 @@
 const prisma = require("../prisma");
-const errors = require("./errors");
 
 const signupValidation = async (email, username, password) => {
     const validationErrors = {};

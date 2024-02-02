@@ -11,7 +11,12 @@ module.exports = () => async (req, res, next) => {
             }
         },
         include: {
-            users: true
+            users: {
+                select: {
+                    email: true,
+                    name: true
+                }
+            }
         }
     });
 

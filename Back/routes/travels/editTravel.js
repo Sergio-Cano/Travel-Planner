@@ -1,27 +1,16 @@
+const authorizer = require("../../misc/authorizer");
 const errors = require("../../misc/errors");
 const prisma = require("../../prisma");
-
 
 module.exports = () => async (req, res, next) => {
     const { id } = req.params;
     const { title, connectUsers, disconnectUsers, services } = req.body;
+    const user = res.locals;
+
+    const authorized = await authorizer(id, user);
+
+    if(!authorized) return next(errors[401]);
     
-    const toConnect = [];
-
-    if(connectUsers){
-        for(let user of connectUsers){
-            toConnect.push({email: user})
-        }
-    }
-
-    const toDisconnect = [];
-
-    if(disconnectUsers){
-        for(let user of disconnectUsers){
-            toDisconnect.push({email: user})
-        }
-    }
-
     if(services){
         await prisma.services.deleteMany({
             where: {
@@ -45,8 +34,8 @@ module.exports = () => async (req, res, next) => {
         data: {
             title,
             users: {
-                connect: toConnect,
-                disconnect: toDisconnect
+                connect: connectUsers ? connectUsers.map((user) => ({ email: user })) : [],
+                disconnect: disconnectUsers ? disconnectUsers.map((user) => ({ email: user })) : []
             }
         },
         select: {
@@ -59,6 +48,5 @@ module.exports = () => async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        response
     })
 }

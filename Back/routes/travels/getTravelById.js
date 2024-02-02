@@ -5,9 +5,9 @@ const prisma = require("../../prisma");
 module.exports = () => async (req, res, next) => {
     const { id } = req.params;
 
-    const travel = await prisma.travels.findMany({
+    const travel = await prisma.travels.findFirst({
         where: {
-            id: { equals: id }
+            id
         }
     })
 

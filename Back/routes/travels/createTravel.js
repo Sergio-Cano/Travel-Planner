@@ -4,8 +4,6 @@ const prisma = require("../../prisma");
 module.exports = () => async (req, res, next) => {
     const { title, users, services } = req.body;
 
-    console.log(users)
-
     const response = await prisma.travels.create({
         data: {
             title,

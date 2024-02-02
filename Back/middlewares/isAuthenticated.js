@@ -1,7 +1,6 @@
 const { deserializeToken } = require("../misc/authUtils");
 const errors = require("../misc/errors");
 
-
 module.exports = (req, res, next) => {
     const payload = deserializeToken(req);
 
