@@ -16,7 +16,8 @@ module.exports = () => async (req, res, next) => {
                     email: true,
                     name: true
                 }
-            }
+            },
+            services: true
         }
     });
 

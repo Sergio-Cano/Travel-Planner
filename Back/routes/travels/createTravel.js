@@ -8,7 +8,7 @@ module.exports = () => async (req, res, next) => {
         data: {
             title,
             users: {
-                connect: users ? users.map((user) => ({ email: user })) : []
+                connect: users.map((user) => ({ email: user }))
             }
         }
     })
@@ -16,17 +16,13 @@ module.exports = () => async (req, res, next) => {
     if(!response) return next(errors[500]);
     
     if(services){
-        const travelServices = services.map((service) => {
-            return {...service, travelId: response.id}
-        })
-
         await prisma.services.createMany({
-            data: travelServices
+            data: services.map((service) => ({...service, travelId: response.id}))
         })
     }
 
     res.status(200).json({
         success: true,
-        response
+        content: response.title
     })
 }

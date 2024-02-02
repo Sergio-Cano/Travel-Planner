@@ -18,12 +18,8 @@ module.exports = () => async (req, res, next) => {
             }
         })
 
-        const travelServices = services.map((service) => {
-            return {...service, travelId: id}
-        })
-
         await prisma.services.createMany({
-            data: travelServices
+            data: services.map((service) => ({...service, travelId: id}))
         })
     }
 
@@ -48,5 +44,6 @@ module.exports = () => async (req, res, next) => {
 
     res.status(200).json({
         success: true,
+        content: response.title
     })
 }
