@@ -10,7 +10,7 @@ module.exports = () => async (req, res, next) => {
 
     if(validationErrors?.empty_inputs) return next(errors[400]);
     if(validationErrors?.existing_email) return next(errors.existing_email);
-    if(validationErrors?.empty_inputs) return next(errors.pass_length);
+    if(validationErrors?.pass_length) return next(errors.pass_length);
     
     const hashedPassword = await hashPass(password);
 

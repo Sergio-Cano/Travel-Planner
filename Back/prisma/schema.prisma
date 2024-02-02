@@ -23,14 +23,13 @@ model User {
 model Travels {
   id        String   @id @default(uuid())
   title     String
-  usersId   String[]
   users     User[]  
   services  Services[]
 }
 
 model Services {
   id        String  @id @default(uuid())
-  title     String 
+  title     String
   type      Type
   cost      Decimal
   links     String[]
