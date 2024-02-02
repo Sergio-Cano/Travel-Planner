@@ -8,6 +8,16 @@ module.exports = () => async (req, res, next) => {
     const travel = await prisma.travels.findFirst({
         where: {
             id
+        },
+        select: {
+            title: true,
+            users: {
+                select: {
+                    email: true,
+                    name: true
+                }
+            },
+            services: true
         }
     })
 
