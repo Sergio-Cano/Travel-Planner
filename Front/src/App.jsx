@@ -5,14 +5,14 @@ import Travels from "./pages/Travels";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-const App = () => { 
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/travels" element={<Travels />} />
       <Route path="/travels/:id" element={<TravelDetails />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/travels/:id" element={<Register />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   )
 }

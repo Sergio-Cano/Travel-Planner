@@ -4,7 +4,7 @@ const errors = require("../../misc/errors");
 
 module.exports = () => async (req, res, next) => {
     const { email, password } = req.body;
-
+    
     if(!email || !password) return next(errors[400]);
 
     const response = await prisma.user.findUnique({
